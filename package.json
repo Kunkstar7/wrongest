@@ -1,0 +1,13 @@
+{
+  "name": "wrongest-words",
+  "version": "0.0.1",
+  "description": "Online card game.",
+  "main": "app.js",
+  "repository": "",
+  "author": "Mostafa Eweda <mostafa@c9.io>",
+  "dependencies": {
+    "jade": "latest",
+    "express": "latest",
+    "socket.io": "latest"
+  }
+}
