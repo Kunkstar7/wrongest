@@ -9,7 +9,8 @@ angular.module('wrong.controllers', ['wrong.services']).
       
     //Initial connection, happens for every connection.
     socket.on('init', function (data) {
-        $scope.users = data.users;
+        $scope.games = data.gameList;
+        $scope.name = data.name;
         //Initialization routine.
     });
   

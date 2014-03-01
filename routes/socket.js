@@ -1,11 +1,22 @@
 //Persistent list of currently created games.
-var games = {};
-
+var games = [];
+/* Game Model
+ * id: Game id.
+ * players: Array of current connected sockets.
+ * phase: phase of gameplay.
+ * To be added: implementation of game information.
+ */
+ 
+ //Test game object.
+ games.push({id: 1, players: [], phase:0});
+ 
+ /*Socket functions exported as module.*/
 module.exports = function (socket) {
 
     //Initial Connection.
     socket.emit('init', {
-        games: games
+        name: "koe",
+        gameList: games
       });
       
     /*
