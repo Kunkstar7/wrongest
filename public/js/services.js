@@ -21,7 +21,36 @@ factory('socket', function ($rootScope) {
             callback.apply(socket, args);
           }
         });
-      })
+      });
     }
   };
+}).
+
+
+factory('games', function ($rootScope) {
+    var list = {};
+    var service = {};
+        
+    /* Game Model
+     * id: Game id.
+     * players: Array of current connected sockets.
+     * phase: phase of gameplay.
+     * To be added: implementation of game information.
+     */
+     service.setup = function(gameList){
+         list = gameList;
+     }
+     
+    service.add = function(id, game){
+        list[id] = game;
+    };
+    
+    service.load = function(){
+        return list;
+    }
+    service.get = function(id){
+        return list[id];
+    }
+        
+     return service;
 });

@@ -4,8 +4,9 @@ html(ng-app='wrong')
         meta(charset='utf8')
         base(href='/')
         title Wrong Words
-        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css')
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
         link(rel='stylesheet', href='/css/core.css')
+        //link(rel='stylesheet', href='/css/wrong.css')
         
     body
 
@@ -20,7 +21,7 @@ html(ng-app='wrong')
                             a Home
                             
                     form(class="navbar-form navbar-right")
-                        input(class="form-control", type="text", placeholder="Find game...", ng-model="gameID")
+                        input(class="form-control", type="text", placeholder="Find game...", ng-model="query.name")
         
         block content
         

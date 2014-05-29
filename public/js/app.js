@@ -5,8 +5,8 @@ var app = angular.module('wrong', ['ngRoute', 'wrong.controllers', 'wrong.servic
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
     when('/', {
-      templateUrl: 'partials/join',
-      controller: 'joinCtrl'
+      templateUrl: 'partials/lobby',
+      controller: 'lobbyCtrl'
     }).
     when('/game', {
       redirectTo: '/'

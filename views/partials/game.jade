@@ -1,4 +1,24 @@
 .container
     div(ng-controller="gameCtrl")
-        p Hello {{name}}
-        | We made it this far!
+        | test
+        | rid: {{rid}}
+        | {{game.id}}
+        div(class="row")
+        div(class="card span3" ng-repeat="player in game.players")
+            div(class="back")
+                h1
+                    span.playername {{player.id}}
+                    | 's Card
+                h3
+                    span.score 0
+                    
+            div(class="front")
+                span Card 
+                    span.series 0
+                p.quote I am a playing card
+                small
+                    span.author Vladomir 
+                    | (episode 000)
+                    button(class="btn btn-primary")
+                    button(class="btn btn-danger")
+                    span.score 222
