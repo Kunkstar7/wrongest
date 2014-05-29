@@ -24,6 +24,12 @@ angular.module('wrong.controllers', ['wrong.services']).
     });
   
    
+   
+   socket.on('game:added', function(data) {
+       games.add(data.id,data.game);
+       //Resync with server data.
+       
+   });
     /*
      * Lobby Join Actions - Client Side
      * Emit Events
@@ -44,9 +50,11 @@ angular.module('wrong.controllers', ['wrong.services']).
     };
     
     //Emit an attempt to join a new lobby.
-    $scope.createGame = function() {
+    $scope.createGame = function(id, players, rounds) {
         socket.emit('lobby:create', {
-            id: $scope.generatedId
+            id: id,
+            totalPlayers: players,
+            totalRounds: rounds
         }, function(result){
             if(!result){
                 alert("Failed to create game.");

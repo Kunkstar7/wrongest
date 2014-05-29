@@ -54,7 +54,7 @@ module.exports = function (socket) {
         //Make sure the key doesn't already exist.
         if(!(data.id in games)){
             //Add the game to the authoritative model.
-            createGame(data.id);
+            createGame(data.id, data.totalPlayers, data.totalRounds);
             
             //Have the socket join the broadcast room to receive events.
             socket.join(data.id);
@@ -63,6 +63,10 @@ module.exports = function (socket) {
             //Note: This is a temporary ID assignment until sessions arrive.
             var randName = Math.random().toString(36).substr(2, 7);
             games[data.id].players[randName]= {id:randName, playing:false,score:0};
+            games[data.id].info.currentPlayers += 1;
+            
+            //Broadcast this model change to everyone.
+            socket.emit('game:added', {id: data.id, game:games[data.id]});
         }
     });
     
@@ -72,7 +76,7 @@ module.exports = function (socket) {
      
      //Add a new game entry to the server's list of games.
      function createGame(id, totalPlayers, totalRounds){
-         var newGame = {info: {}, players: {}, state:{}, deck:[]};
+         var newGame = {info: {}, players: {}, state:{}};
          
          //Set up the info section.
          newGame.info.id = id;
@@ -98,12 +102,12 @@ module.exports = function (socket) {
         
         var quotesUsed = [];
         var deck = [];
-        
+        console.log("here");
         //Build cards for each slot needed.
         for(var i=0;i<size;i++){
            
             var randIndex = Math.floor((Math.random() * cards.length) + 1); //Pick random quote.
-            
+
              //Iterate through making sure we have unique quotes.
              //NOTE - We've used indexOf() which is not supported in IE7/8. Find a suitable replacement later.
             while(quotesUsed.indexOf(randIndex) >= 0){
@@ -111,10 +115,13 @@ module.exports = function (socket) {
             }
             
             //Add the card to the game's deck, tell the generator that we've used this quote now.
+            console.log(cards[randIndex]);
             deck.push({quote:cards[randIndex], value:1});
             quotesUsed.push(randIndex);
             
         }
+        
+        return deck;
     }
      
       

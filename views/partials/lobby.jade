@@ -2,6 +2,6 @@
     div(ng-controller="lobbyCtrl")
     
     div.join
-        button(class="btn btn-primary", ng-click="createGame(generatedId, 3, 3)") Create Game
+        button(class="btn btn-primary", ng-click="createGame('{{generatedId}}', 3, 3)") Create Game
     
-       a(ng-repeat="game in games | filter:query", ng-href="/game/{{game.id}}", ng-click="joinSpecifiedGame(game.id)") Players: {{game.currentPlayers}} / {{game.maxPlayers}} Round: {{game.round}}
+       a(ng-repeat="game in games", ng-href="/game/{{game.info.id}}", ng-click="joinGame(game.info.id)") Players: {{game.info.currentPlayers}} / {{game.info.totalPlayers}}
